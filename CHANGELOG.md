@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.1.0-rc.3](https://github.com/michalby24/squash/compare/v0.1.0-rc.2...v0.1.0-rc.3) (2026-01-25)
+
+
+### Features
+
+* refactor version handling and improve baseline tag fetching logic ([396b2b9](https://github.com/michalby24/squash/commit/396b2b9750293569f8a5a601494979947ee7bfb5))
+
+
+### Miscellaneous Chores
+
+* enforce correct rc version ([bab8fd2](https://github.com/michalby24/squash/commit/bab8fd2adfd692303d103c6c60b4e63a203cbbdc))
+
 ## [0.1.0-rc.2](https://github.com/michalby24/squash/compare/v0.1.0...v0.1.0-rc.2) (2026-01-25)
 
 
