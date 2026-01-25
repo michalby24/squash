@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.1.0](https://github.com/michalby24/squash/compare/v0.1.0-rc.4...v0.1.0) (2026-01-25)
+
+
+### Features
+
+* next ([#8](https://github.com/michalby24/squash/issues/8)) ([4e46d78](https://github.com/michalby24/squash/commit/4e46d78964503aa759e320e0ad7ae6973228c46a))
+
+
+### Miscellaneous Chores
+
+* enforce correct rc version ([4f4e069](https://github.com/michalby24/squash/commit/4f4e069a4770426095fc80e0dc7e92586571df91))
+
 ## [0.1.0-rc.4](https://github.com/michalby24/squash/compare/v0.1.0-rc.2...v0.1.0-rc.4) (2026-01-25)
 
 
