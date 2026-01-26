@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.3-rc.1](https://github.com/michalby24/squash/compare/v0.1.2-rc.1...v0.1.3-rc.1) (2026-01-26)
+
+
+### Bug Fixes
+
+* enhance skip conditions for release-please commits in next branch ([b58a5a5](https://github.com/michalby24/squash/commit/b58a5a5f8abe709b430c6558423d4e7626238ab2))
+
 ## [0.1.2-rc.1](https://github.com/michalby24/squash/compare/v0.1.1-rc.6...v0.1.2-rc.1) (2026-01-26)
 
 
