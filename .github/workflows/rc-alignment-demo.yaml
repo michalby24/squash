@@ -7,8 +7,7 @@ on:
       - main
   pull_request:
     types: [closed]
-    branches:
-      - main
+
 
 concurrency:
   group: smart-release-please-${{ github.ref }}
