@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.2.0-rc.5](https://github.com/michalby24/squash/compare/v0.2.0-rc.3...v0.2.0-rc.5) (2026-01-26)
+
+
+### Bug Fixes
+
+* improve handling of manifest reset in release process ([90d67e3](https://github.com/michalby24/squash/commit/90d67e3b3f34fae26ee5a3b0baad545a95a765b8))
+
+
+### Miscellaneous Chores
+
+* enforce correct rc version ([5075333](https://github.com/michalby24/squash/commit/5075333428b5f1fea18ef1b1731991e5cf8b5578))
+
 ## [0.2.0-rc.3](https://github.com/michalby24/squash/compare/v0.2.0-rc.2...v0.2.0-rc.3) (2026-01-26)
 
 
