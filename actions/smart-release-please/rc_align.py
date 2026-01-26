@@ -144,6 +144,8 @@ def set_output(name: str, value: str):
 
 def should_skip(branch: str) -> bool:
     last_commit_msg = run_git(["log", "-1", "--pretty=%s"], fail_on_error=False) or ""
+    last_commit_body = run_git(["log", "-1", "--pretty=%b"], fail_on_error=False) or ""
+    full_commit_msg = f"{last_commit_msg}\n{last_commit_body}"
     
     if branch == "next":
         head_tags = run_git(["tag", "--points-at", "HEAD"], fail_on_error=False)
@@ -157,12 +159,18 @@ def should_skip(branch: str) -> bool:
         print(f"INFO: Detected release-please release commit. Skipping.")
         return True
     
-    if "Merge pull request" in last_commit_msg and "release-please" in last_commit_msg:
+    # Detect both regular merge and squash merge from release-please
+    if "release-please" in last_commit_msg:
         print(f"INFO: Detected release-please merge commit. Skipping.")
         return True
     
     if MANIFEST_RESET_MSG in last_commit_msg:
         print(f"INFO: Detected manifest reset commit. Skipping.")
+        return True
+    
+    # Skip if this commit already has a Release-As footer (from squash merge)
+    if BOT_FOOTER_TAG in full_commit_msg:
+        print(f"INFO: Commit already has {BOT_FOOTER_TAG} footer. Skipping.")
         return True
         
     return False
