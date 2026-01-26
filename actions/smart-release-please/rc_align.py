@@ -163,6 +163,7 @@ def should_skip(branch: str) -> bool:
         print(f"INFO: Detected release-please merge commit. Skipping.")
         return True
     
+    # Check for manifest reset commits (both branches)
     if MANIFEST_RESET_MSG in last_commit_msg:
         print(f"INFO: Detected manifest reset commit. Skipping.")
         return True
