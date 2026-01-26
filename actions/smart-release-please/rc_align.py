@@ -25,7 +25,6 @@ def parse_semver(tag):
     # Match Stable: v1.0.0
     m_stable = re.match(r"^v(\d+)\.(\d+)\.(\d+)$", tag)
     if m_stable:
-        # Return rc=0 for stable, but logic elsewhere distinguishes stable vs rc
         return int(m_stable[1]), int(m_stable[2]), int(m_stable[3]), 0
     
     return 0, 0, 0, 0
@@ -44,8 +43,6 @@ def find_baseline_tag():
     all_tags = tags_output.split('\n')
     
     # 2. Python-side Sort (Reliable SemVer)
-    # Returns tuple: (major, minor, patch, is_stable, rc_num)
-    # is_stable is 1 for Stable, 0 for RC. This GUARANTEES Stable > RC for same version.
     def version_key(t):
         maj, min, pat, rc = parse_semver(t)
         is_stable = 1 if "-rc" not in t else 0
@@ -133,11 +130,26 @@ def calculate_next_version(major, minor, patch, rc, depth, is_breaking, is_feat,
         # Came from v0.1.1-rc.11 -> Next is 0.1.1-rc.12+depth
         return f"{major}.{minor}.{patch}-rc.{rc + depth}"
 
+def is_squash_merge_from_next(commit_msg):
+    """Detect if this is a squash-and-merge commit from next branch"""
+    # Pattern 1: "Merge pull request #123 from org/next"
+    if re.search(r"Merge pull request #\d+ from .+/next", commit_msg):
+        return True
+    
+    # Pattern 2: Squash commits often contain the PR title and description
+    # and may reference "next" branch
+    if "next" in commit_msg.lower() and any(word in commit_msg.lower() for word in ["merge", "squash", "pull request"]):
+        return True
+    
+    return False
+
 def main():
     branch = os.environ.get("GITHUB_REF_NAME")
     print(f"INFO: Running on branch: {branch}")
 
     last_commit_msg = run_git_command(["log", "-1", "--pretty=%s"], fail_on_error=False)
+    last_commit_body = run_git_command(["log", "-1", "--pretty=%b"], fail_on_error=False)
+    full_commit_msg = f"{last_commit_msg}\n{last_commit_body}" if last_commit_body else last_commit_msg
     
     # Check if next branch has a stable release tag at HEAD (happens after sync from main)
     if branch == "next":
@@ -169,6 +181,12 @@ def main():
             # Fetch all tags from remote first to ensure we see tags from merged branches
             run_git_command(["fetch", "--tags"], fail_on_error=False)
             
+            # Check if this is a squash-and-merge from next
+            is_from_next = is_squash_merge_from_next(full_commit_msg)
+            
+            if is_from_next:
+                print(f"INFO: Detected squash-and-merge from next branch")
+            
             # Get ALL tags (not just merged) to see tags from next branch
             tags_output = run_git_command(["tag", "-l", "v*"], fail_on_error=False)
             
@@ -186,9 +204,15 @@ def main():
                 latest_tag = sorted(all_tags, key=version_key, reverse=True)[0]
                 print(f"INFO: Latest tag found: {latest_tag}")
                 
-                clean_tag = re.sub(r'-rc.*', '', latest_tag)
-                stable_version = clean_tag.lstrip('v')
-                print(f"INFO: Promoting to stable {stable_version}")
+                # If it's an RC tag and this is from next, promote it to stable
+                if "-rc" in latest_tag:
+                    clean_tag = re.sub(r'-rc.*', '', latest_tag)
+                    stable_version = clean_tag.lstrip('v')
+                    print(f"INFO: Promoting RC {latest_tag} to stable {stable_version}")
+                else:
+                    # Already stable, use as-is
+                    stable_version = latest_tag.lstrip('v')
+                    print(f"INFO: Using existing stable version {stable_version}")
 
             with open(os.environ["GITHUB_OUTPUT"], "a") as f:
                 f.write(f"next_version={stable_version}\n")
