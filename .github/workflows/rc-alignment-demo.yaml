@@ -1,10 +1,10 @@
 name: RC Alignment Demo
 
 on:
-  push:
-    branches:
-      - next
-      - main
+  # push:
+  #   branches:
+  #     - next
+  #     - main
   pull_request:
     branches:
       - main
