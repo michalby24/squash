@@ -5,6 +5,9 @@ on:
     branches:
       - next
       - main
+  pull_request:
+    branches:
+      - main
 
 concurrency:
   group: smart-release-please-${{ github.ref }}
