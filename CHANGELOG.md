@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.3.0-rc.14](https://github.com/michalby24/squash/compare/v0.3.0-rc.12...v0.3.0-rc.14) (2026-01-26)
+
+
+### Bug Fixes
+
+* make GitHub token input optional in action configuration ([ba39db4](https://github.com/michalby24/squash/commit/ba39db4f945f8651463f24b5b3368b93754a0683))
+
+
+### Miscellaneous Chores
+
+* enforce correct rc version ([8781dbd](https://github.com/michalby24/squash/commit/8781dbdd17c28bc84fee35bbaafdd9b15ade6c5a))
+
 ## [0.3.0-rc.12](https://github.com/michalby24/squash/compare/v0.2.1-rc.1...v0.3.0-rc.12) (2026-01-26)
 
 
