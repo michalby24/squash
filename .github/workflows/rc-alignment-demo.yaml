@@ -5,7 +5,10 @@ on:
     branches:
       - next
       - main
-
+  pull_request:
+    branches:
+      - main
+      
 concurrency:
   group: smart-release-please-${{ github.ref }}
   cancel-in-progress: false  # false to queue, not cancel
