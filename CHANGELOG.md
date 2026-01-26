@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.1.1-rc.6](https://github.com/michalby24/squash/compare/v0.1.1-rc.3...v0.1.1-rc.6) (2026-01-26)
+
+
+### Bug Fixes
+
+* enhance should_skip logic to handle commit footers and merge types ([85e01ff](https://github.com/michalby24/squash/commit/85e01ffb0d16ea39c1b72369fd3d41e351a77776))
+* test ([93fc498](https://github.com/michalby24/squash/commit/93fc498aaed92ef6e9d0e55b103712595f2c76d1))
+
+
+### Miscellaneous Chores
+
+* enforce correct rc version ([8e3aa3c](https://github.com/michalby24/squash/commit/8e3aa3cbc86e8c83870921c18ae80fc663663148))
+* enforce correct rc version ([7c5858f](https://github.com/michalby24/squash/commit/7c5858f5433ad5d388ebe64166e95ac573066086))
+
 ## [0.1.1-rc.3](https://github.com/michalby24/squash/compare/v0.1.1-rc.1...v0.1.1-rc.3) (2026-01-26)
 
 
