@@ -42,6 +42,48 @@
 * enforce correct rc version ([326236e](https://github.com/michalby24/squash/commit/326236ed0e5001ec8d3e0e9c2225866917421401))
 * enforce correct rc version ([b516799](https://github.com/michalby24/squash/commit/b516799270782159db06d032467aae37d604def1))
 
+## [0.3.0](https://github.com/michalby24/squash/compare/v0.2.1-rc.1...v0.3.0) (2026-01-26)
+
+
+### Features
+
+* next ([a241af7](https://github.com/michalby24/squash/commit/a241af71d45f42057f56c54a46bfec6431bc1c34))
+* next ([#71](https://github.com/michalby24/squash/issues/71)) ([e94e34d](https://github.com/michalby24/squash/commit/e94e34db90ea2966f5a770418072bc63760f5ee7))
+* test ([85322e1](https://github.com/michalby24/squash/commit/85322e1c65e98376b97b3fabd5671aa580eef8ba))
+
+
+### Bug Fixes
+
+* enhance manifest handling and RC promotion logic ([92e62d1](https://github.com/michalby24/squash/commit/92e62d154dae3c38e1bc8df0e62dfee64cc47d56))
+* make GitHub token input optional in action configuration ([ba39db4](https://github.com/michalby24/squash/commit/ba39db4f945f8651463f24b5b3368b93754a0683))
+* next ([#64](https://github.com/michalby24/squash/issues/64)) ([b6a6696](https://github.com/michalby24/squash/commit/b6a6696aac5fef067fcabe3f85f47056f5861444))
+* next ([#65](https://github.com/michalby24/squash/issues/65)) ([6ae10e3](https://github.com/michalby24/squash/commit/6ae10e3b69f24fab675464791f05d1ab80a27476))
+* test ([5990f49](https://github.com/michalby24/squash/commit/5990f49734848d5424f60eb6cf3a1b968b1b3358))
+* test ([a3a7484](https://github.com/michalby24/squash/commit/a3a7484c5da88dabe41de572049686842392c5f2))
+* test ([3b67412](https://github.com/michalby24/squash/commit/3b6741235cfe856b360ce9b484a0bbb99b80cb56))
+* test ([bf744e7](https://github.com/michalby24/squash/commit/bf744e722d145d2225ced8ecb5536b692b015fca))
+* test ([c0f35b9](https://github.com/michalby24/squash/commit/c0f35b9db25f21a2f61e311f4c3888ce55efcc33))
+* test ([2268050](https://github.com/michalby24/squash/commit/226805068051a13731b3b122159f73e3757617b6))
+* update workflow trigger to use pull_request instead of push ([b0f1190](https://github.com/michalby24/squash/commit/b0f1190235a183500457204125ca259cc4ac2bac))
+
+
+### Miscellaneous Chores
+
+* enforce correct rc version ([c62f6d8](https://github.com/michalby24/squash/commit/c62f6d82fa436379d7497c9018d1e898fe4eef67))
+* enforce correct rc version ([8781dbd](https://github.com/michalby24/squash/commit/8781dbdd17c28bc84fee35bbaafdd9b15ade6c5a))
+* enforce correct rc version ([2738ca4](https://github.com/michalby24/squash/commit/2738ca4862d335dc7122382161b9b5e6dc5dff9c))
+* enforce correct rc version ([c2e67b4](https://github.com/michalby24/squash/commit/c2e67b44d0a8060c724cc6895a80aaa45932abf1))
+* enforce correct rc version ([c2380f2](https://github.com/michalby24/squash/commit/c2380f2681698d4d2fd14e58c10b5f937b646231))
+* enforce correct rc version ([3045531](https://github.com/michalby24/squash/commit/3045531e130fff24772f9a71ad94c1e19ca64ddd))
+* enforce correct rc version ([4f010d7](https://github.com/michalby24/squash/commit/4f010d7cc6a025cdf6fc32bc123c69d36ac65b55))
+* enforce correct rc version ([7a11b12](https://github.com/michalby24/squash/commit/7a11b12a064b0e29d79064fa16a2998ace503506))
+* enforce correct rc version ([2941f34](https://github.com/michalby24/squash/commit/2941f349dae8cc80ad4b0ae2085c3d6a592a7448))
+* enforce correct rc version ([74c6c6d](https://github.com/michalby24/squash/commit/74c6c6d19cf485d6e91c0a9aa51b2f11b8952c8e))
+* enforce correct rc version ([c699868](https://github.com/michalby24/squash/commit/c699868b4e905d08e48e606a65c5babab515a7d3))
+* enforce correct rc version ([116688b](https://github.com/michalby24/squash/commit/116688bc29a8b800f4e45c1fb04edc8ad895f7dc))
+* enforce correct rc version ([326236e](https://github.com/michalby24/squash/commit/326236ed0e5001ec8d3e0e9c2225866917421401))
+* enforce correct rc version ([b516799](https://github.com/michalby24/squash/commit/b516799270782159db06d032467aae37d604def1))
+
 ## [0.3.0-rc.12](https://github.com/michalby24/squash/compare/v0.2.1-rc.1...v0.3.0-rc.12) (2026-01-26)
 
 
