@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.2.0-rc.2](https://github.com/michalby24/squash/compare/v0.1.3-rc.13...v0.2.0-rc.2) (2026-01-26)
+
+
+### Features
+
+* enhance version parsing and squash merge detection in release process ([48ec93b](https://github.com/michalby24/squash/commit/48ec93b2815dbe8b94e71a26903e72b9277b5a94))
+
+
+### Miscellaneous Chores
+
+* enforce correct rc version ([a494d3c](https://github.com/michalby24/squash/commit/a494d3c6cc6164d6123f042503284ccf15023cf0))
+
 ## [0.1.3-rc.13](https://github.com/michalby24/squash/compare/v0.1.3-rc.11...v0.1.3-rc.13) (2026-01-26)
 
 
