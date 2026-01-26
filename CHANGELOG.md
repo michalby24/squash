@@ -1,5 +1,89 @@
 # Changelog
 
+## [0.4.0-rc.19](https://github.com/michalby24/squash/compare/v0.2.1-rc.1...v0.4.0-rc.19) (2026-01-26)
+
+
+### Features
+
+* next ([a241af7](https://github.com/michalby24/squash/commit/a241af71d45f42057f56c54a46bfec6431bc1c34))
+* next ([#71](https://github.com/michalby24/squash/issues/71)) ([e13d90d](https://github.com/michalby24/squash/commit/e13d90d6c2b8d3edb8025a223c89aa9d4b096d61))
+* next ([#71](https://github.com/michalby24/squash/issues/71)) ([e94e34d](https://github.com/michalby24/squash/commit/e94e34db90ea2966f5a770418072bc63760f5ee7))
+* simplify workflow triggers and enhance action logic ([7363f8a](https://github.com/michalby24/squash/commit/7363f8a8ad50004e19bd93249b8cc9e5c720f953))
+* test ([965b5da](https://github.com/michalby24/squash/commit/965b5da825679ba0960b00e113d2aecd96e05cf9))
+* test ([85322e1](https://github.com/michalby24/squash/commit/85322e1c65e98376b97b3fabd5671aa580eef8ba))
+
+
+### Bug Fixes
+
+* enhance manifest handling and RC promotion logic ([ada2904](https://github.com/michalby24/squash/commit/ada29045ccf64d390ad547b7e0d54807bbb9f9d6))
+* enhance manifest handling and RC promotion logic ([92e62d1](https://github.com/michalby24/squash/commit/92e62d154dae3c38e1bc8df0e62dfee64cc47d56))
+* make GitHub token input optional in action configuration ([91c0440](https://github.com/michalby24/squash/commit/91c0440d94baa6670e4d9492d93d45164aaf0d17))
+* make GitHub token input optional in action configuration ([ba39db4](https://github.com/michalby24/squash/commit/ba39db4f945f8651463f24b5b3368b93754a0683))
+* next ([#64](https://github.com/michalby24/squash/issues/64)) ([05a317f](https://github.com/michalby24/squash/commit/05a317f001db1687097e606d336b631e0fb4aae5))
+* next ([#64](https://github.com/michalby24/squash/issues/64)) ([b6a6696](https://github.com/michalby24/squash/commit/b6a6696aac5fef067fcabe3f85f47056f5861444))
+* next ([#65](https://github.com/michalby24/squash/issues/65)) ([a274570](https://github.com/michalby24/squash/commit/a274570a25df9991469e1e18bb072ed7f9577614))
+* next ([#65](https://github.com/michalby24/squash/issues/65)) ([6ae10e3](https://github.com/michalby24/squash/commit/6ae10e3b69f24fab675464791f05d1ab80a27476))
+* test ([dcfb456](https://github.com/michalby24/squash/commit/dcfb456037e3186be3f96f23fbcdb73b43856dee))
+* test ([c25c56d](https://github.com/michalby24/squash/commit/c25c56d1a22c54814fe9de07de260aca8cf68f48))
+* test ([87b3f43](https://github.com/michalby24/squash/commit/87b3f43b9ae5d5caf881b320ea10c2cbf8797393))
+* test ([1d84a3f](https://github.com/michalby24/squash/commit/1d84a3fb408de652ff08ec17b3048f1f517ba933))
+* test ([daaad61](https://github.com/michalby24/squash/commit/daaad61e8bac786b38e89b89db8c1c1eceeb8ef2))
+* test ([35bcad1](https://github.com/michalby24/squash/commit/35bcad1c05ed3de0a3fb2c3a0d45facb0bb31f08))
+* test ([b5d148b](https://github.com/michalby24/squash/commit/b5d148b16a227202f94eb18dc02ec864909ca89f))
+* test ([5fe3e90](https://github.com/michalby24/squash/commit/5fe3e907e8b463fbe2c134eeef0cecf3ddd50907))
+* test ([0e973cd](https://github.com/michalby24/squash/commit/0e973cda0febeed6b79f338e229378f968ab74af))
+* test ([638d457](https://github.com/michalby24/squash/commit/638d457a6f197e0cfccaa1c9ab3d5c6edfeab262))
+* test ([5990f49](https://github.com/michalby24/squash/commit/5990f49734848d5424f60eb6cf3a1b968b1b3358))
+* test ([a3a7484](https://github.com/michalby24/squash/commit/a3a7484c5da88dabe41de572049686842392c5f2))
+* test ([3b67412](https://github.com/michalby24/squash/commit/3b6741235cfe856b360ce9b484a0bbb99b80cb56))
+* test ([bf744e7](https://github.com/michalby24/squash/commit/bf744e722d145d2225ced8ecb5536b692b015fca))
+* test ([c0f35b9](https://github.com/michalby24/squash/commit/c0f35b9db25f21a2f61e311f4c3888ce55efcc33))
+* test ([2268050](https://github.com/michalby24/squash/commit/226805068051a13731b3b122159f73e3757617b6))
+* update workflow trigger to use pull_request instead of push ([e7f37e1](https://github.com/michalby24/squash/commit/e7f37e1104e6814062961d848fbf18491f373388))
+* update workflow trigger to use pull_request instead of push ([b0f1190](https://github.com/michalby24/squash/commit/b0f1190235a183500457204125ca259cc4ac2bac))
+
+
+### Miscellaneous Chores
+
+* enforce correct rc version ([35f8fa2](https://github.com/michalby24/squash/commit/35f8fa266c4cd79b9401d4cc7614cb6d1f8c5c65))
+* enforce correct rc version ([6c103f5](https://github.com/michalby24/squash/commit/6c103f5539fba65e35b4603c18ce800f10755440))
+* enforce correct rc version ([0ef2588](https://github.com/michalby24/squash/commit/0ef25888fd39232a97c9511df06b08d32bbda601))
+* enforce correct rc version ([79cb369](https://github.com/michalby24/squash/commit/79cb3691612f94d48fb5c202d07e17c544d538e1))
+* enforce correct rc version ([27213d0](https://github.com/michalby24/squash/commit/27213d089e2ce5af74bb4c746f94b14f4f2d8115))
+* enforce correct rc version ([468a412](https://github.com/michalby24/squash/commit/468a4121fb5cb1e73ff3bfdb59fa189b1fefb120))
+* enforce correct rc version ([0f9ace9](https://github.com/michalby24/squash/commit/0f9ace924192a666c307627a4c5e0b8d7283a85d))
+* enforce correct rc version ([14b75af](https://github.com/michalby24/squash/commit/14b75af97cbda26815af6433fbfb0e55ff016dfd))
+* enforce correct rc version ([4948f8e](https://github.com/michalby24/squash/commit/4948f8e7990197560a674b2126c3300ccd1a7003))
+* enforce correct rc version ([1288c89](https://github.com/michalby24/squash/commit/1288c8939d9a2a88f6a65e81a4982e05d202a7af))
+* enforce correct rc version ([e4ff574](https://github.com/michalby24/squash/commit/e4ff57474714f9909e966c2c4000182bfc827410))
+* enforce correct rc version ([cfbd62d](https://github.com/michalby24/squash/commit/cfbd62ddd08cd545d1be14ca4c12da64786e73f6))
+* enforce correct rc version ([5d0ac6a](https://github.com/michalby24/squash/commit/5d0ac6a2f45c2e137665204397a4c7d9c046f42e))
+* enforce correct rc version ([e0aed4e](https://github.com/michalby24/squash/commit/e0aed4ed193e9e7d43d6c5739100844a60ff432c))
+* enforce correct rc version ([0604deb](https://github.com/michalby24/squash/commit/0604debd511f209473ff0a6664a1ef53b5ca3ac5))
+* enforce correct rc version ([6fca3c4](https://github.com/michalby24/squash/commit/6fca3c4ac6a9d2d8fbc27110acb75c2f4575d96e))
+* enforce correct rc version ([5b70cbb](https://github.com/michalby24/squash/commit/5b70cbb7a291f6792a78a061cec1e89ba621e5e0))
+* enforce correct rc version ([00087ca](https://github.com/michalby24/squash/commit/00087ca7c4c3bace82093b2d1139cdc3db52beb3))
+* enforce correct rc version ([a368c82](https://github.com/michalby24/squash/commit/a368c82c4dace713dfa9fe0136801670273670bf))
+* enforce correct rc version ([818125a](https://github.com/michalby24/squash/commit/818125a26a6c1d73d5adf7b9d9fdf808d236c96a))
+* enforce correct rc version ([db835f6](https://github.com/michalby24/squash/commit/db835f67cf1fe9ad263359d29fc3cd252f423d1b))
+* enforce correct rc version ([ff017dd](https://github.com/michalby24/squash/commit/ff017dd18552b1073785a1d61a1d074a03225da9))
+* enforce correct rc version ([46eb58a](https://github.com/michalby24/squash/commit/46eb58a8f79ab31065ee5884dba61d6ac0582472))
+* enforce correct rc version ([b8ecf46](https://github.com/michalby24/squash/commit/b8ecf461c86891e212ecab5577293559c49f9d3c))
+* enforce correct rc version ([c62f6d8](https://github.com/michalby24/squash/commit/c62f6d82fa436379d7497c9018d1e898fe4eef67))
+* enforce correct rc version ([8781dbd](https://github.com/michalby24/squash/commit/8781dbdd17c28bc84fee35bbaafdd9b15ade6c5a))
+* enforce correct rc version ([2738ca4](https://github.com/michalby24/squash/commit/2738ca4862d335dc7122382161b9b5e6dc5dff9c))
+* enforce correct rc version ([c2e67b4](https://github.com/michalby24/squash/commit/c2e67b44d0a8060c724cc6895a80aaa45932abf1))
+* enforce correct rc version ([c2380f2](https://github.com/michalby24/squash/commit/c2380f2681698d4d2fd14e58c10b5f937b646231))
+* enforce correct rc version ([3045531](https://github.com/michalby24/squash/commit/3045531e130fff24772f9a71ad94c1e19ca64ddd))
+* enforce correct rc version ([4f010d7](https://github.com/michalby24/squash/commit/4f010d7cc6a025cdf6fc32bc123c69d36ac65b55))
+* enforce correct rc version ([7a11b12](https://github.com/michalby24/squash/commit/7a11b12a064b0e29d79064fa16a2998ace503506))
+* enforce correct rc version ([2941f34](https://github.com/michalby24/squash/commit/2941f349dae8cc80ad4b0ae2085c3d6a592a7448))
+* enforce correct rc version ([74c6c6d](https://github.com/michalby24/squash/commit/74c6c6d19cf485d6e91c0a9aa51b2f11b8952c8e))
+* enforce correct rc version ([c699868](https://github.com/michalby24/squash/commit/c699868b4e905d08e48e606a65c5babab515a7d3))
+* enforce correct rc version ([116688b](https://github.com/michalby24/squash/commit/116688bc29a8b800f4e45c1fb04edc8ad895f7dc))
+* enforce correct rc version ([326236e](https://github.com/michalby24/squash/commit/326236ed0e5001ec8d3e0e9c2225866917421401))
+* enforce correct rc version ([b516799](https://github.com/michalby24/squash/commit/b516799270782159db06d032467aae37d604def1))
+
 ## [0.3.0](https://github.com/michalby24/squash/compare/v0.2.1-rc.1...v0.3.0) (2026-01-26)
 
 
