@@ -4,8 +4,7 @@ description: "Handles RC calculation on next and Stable promotion on main."
 inputs:
   token:
     description: "GitHub Token (PAT)"
-    required: false
-    default: ${{ github.token }}
+    required: true
 
 runs:
   using: "composite"
@@ -61,7 +60,8 @@ runs:
         ${{ 
           steps.calc_rc.outputs.next_version != '' &&
           !contains(github.event.head_commit.message, 'Release-As:') &&
-          ! (startsWith(github.event.head_commit.message, 'chore(') && contains(github.event.head_commit.message, '): release'))
+          ! (startsWith(github.event.head_commit.message, 'chore(') && contains(github.event.head_commit.message, '): release')) &&
+          ! (contains(github.event.head_commit.message, 'Merge branch') && contains(github.event.head_commit.message, 'main'))
         }}
       shell: bash
       run: |
