@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.2.0-rc.7](https://github.com/michalby24/squash/compare/v0.2.0-rc.5...v0.2.0-rc.7) (2026-01-26)
+
+
+### Bug Fixes
+
+* enhance manifest handling and RC promotion logic ([b27eba6](https://github.com/michalby24/squash/commit/b27eba6959faba09c2b9d9e36c2491f6035087c9))
+
+
+### Miscellaneous Chores
+
+* enforce correct rc version ([9da1f8b](https://github.com/michalby24/squash/commit/9da1f8bc0abed6a2e58c31304ba7b5d14ab6e70c))
+
 ## [0.2.0-rc.5](https://github.com/michalby24/squash/compare/v0.2.0-rc.3...v0.2.0-rc.5) (2026-01-26)
 
 
