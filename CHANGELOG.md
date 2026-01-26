@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.3-rc.6](https://github.com/michalby24/squash/compare/v0.1.3-rc.5...v0.1.3-rc.6) (2026-01-26)
+
+
+### Miscellaneous Chores
+
+* enforce correct rc version ([08aef23](https://github.com/michalby24/squash/commit/08aef234a966436bb1eccec9e50e103ae2ba9536))
+
 ## [0.1.3-rc.5](https://github.com/michalby24/squash/compare/v0.1.3-rc.3...v0.1.3-rc.5) (2026-01-26)
 
 
