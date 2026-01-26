@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.2.0-rc.13](https://github.com/michalby24/squash/compare/v0.2.0-rc.9...v0.2.0-rc.13) (2026-01-26)
+
+
+### Features
+
+* simplify workflow triggers and enhance action logic ([8d8962e](https://github.com/michalby24/squash/commit/8d8962ed343e10ccf1ce80dd75573999b5494fac))
+
+
+### Bug Fixes
+
+* test ([8317615](https://github.com/michalby24/squash/commit/83176151513ab93d087eae1085a53da341b7b14d))
+
+
+### Miscellaneous Chores
+
+* enforce correct rc version ([d4394f6](https://github.com/michalby24/squash/commit/d4394f6b2149ed4acc54a08e0b1c030fc67d34b2))
+* enforce correct rc version ([906eb40](https://github.com/michalby24/squash/commit/906eb40c78118c4ba10b6b836993c4a7f8bf97c1))
+* enforce correct rc version ([ca83edb](https://github.com/michalby24/squash/commit/ca83edbffb7e0361dfee52c687e0281b4e39093f))
+
 ## [0.2.0-rc.9](https://github.com/michalby24/squash/compare/v0.2.0-rc.7...v0.2.0-rc.9) (2026-01-26)
 
 

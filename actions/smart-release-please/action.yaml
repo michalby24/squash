@@ -4,7 +4,8 @@ description: "Handles RC calculation on next and Stable promotion on main."
 inputs:
   token:
     description: "GitHub Token (PAT)"
-    required: true  # Make it required to avoid falling back to github.token
+    required: false
+    default: ${{ github.token }}
 
 runs:
   using: "composite"
@@ -20,71 +21,40 @@ runs:
       with:
         python-version: '3.14'
 
-    - name: Check if Last Commit is Manifest Reset
-      id: check_reset
+    - name: Calculate Correct RC Version
+      id: calc_rc
       shell: bash
-      run: |
-        LAST_MSG=$(git log -1 --pretty=%s)
-        if [[ "$LAST_MSG" == *"chore: reset manifest to stable version"* ]]; then
-          echo "manifest_was_reset=true" >> $GITHUB_OUTPUT
-          echo "INFO: Last commit was manifest reset. Will proceed to release."
-        else
-          echo "manifest_was_reset=false" >> $GITHUB_OUTPUT
-        fi
+      run: python3 "${{ github.action_path }}/rc_align.py"
 
-    - name: Fix Manifest for Main Branch (First Run Only)
-      if: |
-        (github.ref_name == 'main' || github.ref_name == 'master') &&
-        steps.check_reset.outputs.manifest_was_reset != 'true'
+    - name: Fix Manifest for Main Branch
+      if: github.ref_name == 'main' || github.ref_name == 'master'
       shell: bash
       run: |
         # Configure Git
         git config user.name "mapcolonies[bot]"
         git config user.email "devops[bot]@mapcolonies.com"
         
-        # Fetch all tags to see latest
-        git fetch --tags
-        
         # On main, find the last stable release and update manifest
         LAST_STABLE=$(git tag -l "v[0-9]*.[0-9]*.[0-9]" --sort=-creatordate | head -n1 | sed 's/^v//')
         
-        if [ -z "$LAST_STABLE" ]; then
-          # No stable release yet, check for RC tags
-          LAST_RC=$(git tag -l "v[0-9]*.[0-9]*.[0-9]*-rc.*" --sort=-creatordate | head -n1)
-          if [ -n "$LAST_RC" ]; then
-            # Strip RC suffix to get target stable version
-            LAST_STABLE=$(echo "$LAST_RC" | sed 's/-rc.*//' | sed 's/^v//')
-            echo "No stable release found. Promoting RC $LAST_RC to $LAST_STABLE"
-          else
-            LAST_STABLE="0.1.0"
-            echo "No tags found at all. Defaulting to $LAST_STABLE"
-          fi
+        if [ -n "$LAST_STABLE" ]; then
+          echo "Setting manifest to last stable release: $LAST_STABLE"
+          echo "{\".\": \"$LAST_STABLE\"}" > .release-please-manifest.json
+        else
+          echo "No stable release found, using calculated version"
+          TARGET_VER="${{ steps.calc_rc.outputs.next_version }}"
+          echo "{\".\": \"$TARGET_VER\"}" > .release-please-manifest.json
         fi
-        
-        echo "Setting manifest to: $LAST_STABLE"
-        echo "{\".\": \"$LAST_STABLE\"}" > .release-please-manifest.json
         
         git add .release-please-manifest.json
         
         # Only commit if there are changes
         if ! git diff --staged --quiet; then
           git commit -m "chore: reset manifest to stable version"
-          git push "https://x-access-token:${{ inputs.token }}@github.com/${{ github.repository }}.git" HEAD:${{ github.ref_name }}
-          
-          echo "✅ Manifest committed and pushed. Workflow will retrigger."
-          exit 0
+          git push "https://x-access-token:${{ inputs.token }}@github.com/${{ github.repository }}.git" ${{ github.ref_name }}
         else
-          echo "No changes to manifest."
+          echo "No changes to manifest, skipping commit"
         fi
-
-    - name: Calculate Correct RC Version
-      # Only run if we're past the manifest reset (or not on main)
-      if: |
-        steps.check_reset.outputs.manifest_was_reset == 'true' ||
-        (github.ref_name != 'main' && github.ref_name != 'master')
-      id: calc_rc
-      shell: bash
-      run: python3 "${{ github.action_path }}/rc_align.py"
 
     - name: Inject Release-As Footer
       if: >-
@@ -109,13 +79,14 @@ runs:
           exit 0
         fi
 
-        # Commit & Push using PAT
+        # Commit & Push
         git commit --allow-empty -m "chore: enforce correct rc version" -m "Release-As: $TARGET_VER"
-        git push "https://x-access-token:${{ inputs.token }}@github.com/${{ github.repository }}.git" HEAD:${{ github.ref_name }}
+        git push "https://x-access-token:${{ inputs.token }}@github.com/${{ github.repository }}.git" ${{ github.ref_name }}
 
         echo "SKIP_RELEASE=true" >> $GITHUB_ENV
 
     - name: Close Stale Release PRs
+      # Only run if we are NOT skipping (meaning we are ready to run release-please)
       if: env.SKIP_RELEASE != 'true' && ${{ !contains(github.ref, 'release-please--branches') }}
       shell: bash
       env:
