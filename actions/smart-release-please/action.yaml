@@ -4,7 +4,7 @@ description: "Handles RC calculation on next and Stable promotion on main."
 inputs:
   token:
     description: "GitHub Token (PAT)"
-    required: true
+    required: true  # Make it required to avoid falling back to github.token
 
 runs:
   using: "composite"
@@ -33,6 +33,13 @@ runs:
         git config user.name "mapcolonies[bot]"
         git config user.email "devops[bot]@mapcolonies.com"
         
+        # Check if manifest reset was already done (to avoid loops)
+        LAST_MSG=$(git log -1 --pretty=%s)
+        if [[ "$LAST_MSG" == *"chore: reset manifest to stable version"* ]]; then
+          echo "Manifest already reset. Skipping."
+          exit 0
+        fi
+        
         # On main, find the last stable release and update manifest
         LAST_STABLE=$(git tag -l "v[0-9]*.[0-9]*.[0-9]" --sort=-creatordate | head -n1 | sed 's/^v//')
         
@@ -50,7 +57,12 @@ runs:
         # Only commit if there are changes
         if ! git diff --staged --quiet; then
           git commit -m "chore: reset manifest to stable version"
-          git push "https://x-access-token:${{ inputs.token }}@github.com/${{ github.repository }}.git" ${{ github.ref_name }}
+          
+          # Push using the PAT token explicitly
+          git push "https://x-access-token:${{ inputs.token }}@github.com/${{ github.repository }}.git" HEAD:${{ github.ref_name }}
+          
+          # Set flag to skip release-please on this run (it will run on the next trigger)
+          echo "SKIP_RELEASE=true" >> $GITHUB_ENV
         else
           echo "No changes to manifest, skipping commit"
         fi
@@ -78,9 +90,9 @@ runs:
           exit 0
         fi
 
-        # Commit & Push
+        # Commit & Push using PAT
         git commit --allow-empty -m "chore: enforce correct rc version" -m "Release-As: $TARGET_VER"
-        git push "https://x-access-token:${{ inputs.token }}@github.com/${{ github.repository }}.git" ${{ github.ref_name }}
+        git push "https://x-access-token:${{ inputs.token }}@github.com/${{ github.repository }}.git" HEAD:${{ github.ref_name }}
 
         echo "SKIP_RELEASE=true" >> $GITHUB_ENV
 
