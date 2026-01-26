@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.1.3-rc.5](https://github.com/michalby24/squash/compare/v0.1.3-rc.3...v0.1.3-rc.5) (2026-01-26)
+
+
+### Bug Fixes
+
+* refine skip conditions for release-please commits in next and main branches ([b390fa4](https://github.com/michalby24/squash/commit/b390fa4f74194c7adf7745cc2364c9891909b48e))
+
+
+### Miscellaneous Chores
+
+* enforce correct rc version ([5f9bc03](https://github.com/michalby24/squash/commit/5f9bc03063ce45f6bffda5929bc607244851881a))
+
 ## [0.1.3-rc.3](https://github.com/michalby24/squash/compare/v0.1.3-rc.1...v0.1.3-rc.3) (2026-01-26)
 
 
