@@ -170,10 +170,8 @@ def main():
         print(f"INFO: Detected release-please merge commit: '{last_commit_msg}'. Skipping.")
         return
     
-    # Check for manifest reset commits (happens after stable release on main)
-    if last_commit_msg and "chore: reset manifest to stable version" in last_commit_msg:
-        print(f"INFO: Detected manifest reset commit: '{last_commit_msg}'. Skipping.")
-        return
+    # DON'T skip on manifest reset - we need to run release-please after the reset
+    # The action.yaml handles skipping the release on the reset commit itself
 
     # --- LOGIC FOR MAIN (Stable Promotion) ---
     if branch in ["main", "master"]:
