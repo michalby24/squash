@@ -144,16 +144,33 @@ def set_output(name: str, value: str):
 
 def should_skip(branch: str) -> bool:
     last_commit_msg = run_git(["log", "-1", "--pretty=%s"], fail_on_error=False) or ""
-    last_commit_body = run_git(["log", "-1", "--pretty=%b"], fail_on_error=False) or ""
-    full_commit_msg = f"{last_commit_msg}\n{last_commit_body}"
     
-    # Check for release-please release commits (both branches)
+    if branch == "next":
+        head_tags = run_git(["tag", "--points-at", "HEAD"], fail_on_error=False)
+        if head_tags:
+            for tag in head_tags.split('\n'):
+                if tag.startswith('v') and re.match(r'^v\d+\.\d+\.\d+$', tag):
+                    print(f"INFO: next branch has stable tag '{tag}' at HEAD. Skipping.")
+                    return True
+
+    # Check if this is a merge from next to main (handles both merge and squash)
+    if branch in ["main", "master"]:
+        # For regular merge commits
+        if "Merge branch 'next'" in last_commit_msg or 'Merge branch "next"' in last_commit_msg:
+            print(f"INFO: Detected merge from next to main. Skipping.")
+            return True
+        
+        # For squash merges or PRs from next
+        if ("next" in last_commit_msg.lower() and 
+            ("merge" in last_commit_msg.lower() or "Merge pull request" in last_commit_msg)):
+            print(f"INFO: Detected squash/merge from next to main. Skipping.")
+            return True
+
     if re.match(r"^chore(\(.*\))?: release", last_commit_msg):
         print(f"INFO: Detected release-please release commit. Skipping.")
         return True
     
-    # Detect both regular merge and squash merge from release-please (both branches)
-    if "release-please" in last_commit_msg:
+    if "Merge pull request" in last_commit_msg and "release-please" in last_commit_msg:
         print(f"INFO: Detected release-please merge commit. Skipping.")
         return True
     
@@ -161,24 +178,6 @@ def should_skip(branch: str) -> bool:
     if MANIFEST_RESET_MSG in last_commit_msg:
         print(f"INFO: Detected manifest reset commit. Skipping.")
         return True
-    
-    # Branch-specific skip conditions
-    if branch == "next":
-        # Skip if next branch has a stable release tag at HEAD (sync from main)
-        head_tags = run_git(["tag", "--points-at", "HEAD"], fail_on_error=False)
-        if head_tags:
-            for tag in head_tags.split('\n'):
-                if tag.startswith('v') and re.match(r'^v\d+\.\d+\.\d+$', tag):
-                    print(f"INFO: next branch has stable tag '{tag}' at HEAD. Skipping.")
-                    return True
-        
-        # Skip if commit already has a Release-As footer (only on next, not main)
-        if BOT_FOOTER_TAG in full_commit_msg:
-            print(f"INFO: Commit already has {BOT_FOOTER_TAG} footer. Skipping.")
-            return True
-    
-    # On main branch: DON'T skip based on Release-As footer
-    # We need to run to promote stable version and fix manifest
         
     return False
 
