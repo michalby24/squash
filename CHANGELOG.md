@@ -7,6 +7,13 @@
 
 * next ([#79](https://github.com/michalby24/squash/issues/79)) ([6f8bbbc](https://github.com/michalby24/squash/commit/6f8bbbc18e38de187ad00a01dacdeea4b3408de4))
 
+## [0.4.0](https://github.com/michalby24/squash/compare/v0.3.0...v0.4.0) (2026-01-26)
+
+
+### Features
+
+* next ([#79](https://github.com/michalby24/squash/issues/79)) ([6f8bbbc](https://github.com/michalby24/squash/commit/6f8bbbc18e38de187ad00a01dacdeea4b3408de4))
+
 ## [0.4.0-rc.19](https://github.com/michalby24/squash/compare/v0.2.1-rc.1...v0.4.0-rc.19) (2026-01-26)
 
 
