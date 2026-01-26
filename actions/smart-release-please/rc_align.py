@@ -144,6 +144,7 @@ def set_output(name: str, value: str):
 
 def should_skip(branch: str) -> bool:
     last_commit_msg = run_git(["log", "-1", "--pretty=%s"], fail_on_error=False) or ""
+    last_commit_body = run_git(["log", "-1", "--pretty=%b"], fail_on_error=False) or ""
     
     if branch == "next":
         head_tags = run_git(["tag", "--points-at", "HEAD"], fail_on_error=False)
@@ -153,24 +154,12 @@ def should_skip(branch: str) -> bool:
                     print(f"INFO: next branch has stable tag '{tag}' at HEAD. Skipping.")
                     return True
 
-    # Check if this is a merge from next to main (handles both merge and squash)
-    if branch in ["main", "master"]:
-        # For regular merge commits
-        if "Merge branch 'next'" in last_commit_msg or 'Merge branch "next"' in last_commit_msg:
-            print(f"INFO: Detected merge from next to main. Skipping.")
-            return True
-        
-        # For squash merges or PRs from next
-        if ("next" in last_commit_msg.lower() and 
-            ("merge" in last_commit_msg.lower() or "Merge pull request" in last_commit_msg)):
-            print(f"INFO: Detected squash/merge from next to main. Skipping.")
-            return True
-
     if re.match(r"^chore(\(.*\))?: release", last_commit_msg):
         print(f"INFO: Detected release-please release commit. Skipping.")
         return True
     
-    if "Merge pull request" in last_commit_msg and "release-please" in last_commit_msg:
+    # Check for both regular merge and squash merge from release-please
+    if ("Merge pull request" in last_commit_msg or "Merge branch" in last_commit_msg) and "release-please" in last_commit_msg:
         print(f"INFO: Detected release-please merge commit. Skipping.")
         return True
     
