@@ -1,5 +1,34 @@
 # Changelog
 
+## [0.1.2-rc.1](https://github.com/michalby24/squash/compare/v0.1.1-rc.6...v0.1.2-rc.1) (2026-01-26)
+
+
+### Features
+
+* next ([#8](https://github.com/michalby24/squash/issues/8)) ([4e46d78](https://github.com/michalby24/squash/commit/4e46d78964503aa759e320e0ad7ae6973228c46a))
+
+
+### Bug Fixes
+
+* next ([f978866](https://github.com/michalby24/squash/commit/f9788662bfb2a9053c1af1013fa6e6e8c0936776))
+* next ([#13](https://github.com/michalby24/squash/issues/13)) ([efa22b4](https://github.com/michalby24/squash/commit/efa22b49934d891160785d7f96ae2dbea7f908de))
+* next ([#15](https://github.com/michalby24/squash/issues/15)) ([b62deb7](https://github.com/michalby24/squash/commit/b62deb7e770210bdb127766d3f18b6750589ccc5))
+* next ([#20](https://github.com/michalby24/squash/issues/20)) ([931d97c](https://github.com/michalby24/squash/commit/931d97c6a0c25cc75499727c1174c7ab72b3bca2))
+* test ([0d23bdd](https://github.com/michalby24/squash/commit/0d23bddd37eb7c45d19c0d23d777da13d83efad5))
+* test ([93fc498](https://github.com/michalby24/squash/commit/93fc498aaed92ef6e9d0e55b103712595f2c76d1))
+* test ([6af9d56](https://github.com/michalby24/squash/commit/6af9d567e00b45765af89b8d384ae5656172449d))
+* test ([b96cd76](https://github.com/michalby24/squash/commit/b96cd76290bedd5a68fdc29e603a608f5979bbe4))
+
+
+### Miscellaneous Chores
+
+* enforce correct rc version ([1f35969](https://github.com/michalby24/squash/commit/1f35969876cbca8e62972b2357691953ae71ced9))
+* enforce correct rc version ([2304260](https://github.com/michalby24/squash/commit/23042600ce805e145a355cf8fad1fcdad4a4c1d2))
+* enforce correct rc version ([7c5858f](https://github.com/michalby24/squash/commit/7c5858f5433ad5d388ebe64166e95ac573066086))
+* enforce correct rc version ([98367be](https://github.com/michalby24/squash/commit/98367be91dc98f0c61a4af6917ad981afbd7c832))
+* enforce correct rc version ([a16ae1a](https://github.com/michalby24/squash/commit/a16ae1a3020191680fb644f14f762f6f9d7a2df0))
+* enforce correct rc version ([4f4e069](https://github.com/michalby24/squash/commit/4f4e069a4770426095fc80e0dc7e92586571df91))
+
 ## [0.1.1](https://github.com/michalby24/squash/compare/v0.1.1-rc.6...v0.1.1) (2026-01-26)
 
 
