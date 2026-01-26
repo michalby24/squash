@@ -4,7 +4,7 @@ description: "Handles RC calculation on next and Stable promotion on main."
 inputs:
   token:
     description: "GitHub Token (PAT)"
-    required: true
+    required: true  # Make it required to avoid falling back to github.token
 
 runs:
   using: "composite"
