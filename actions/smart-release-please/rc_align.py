@@ -169,9 +169,10 @@ def main():
     # --- LOGIC FOR MAIN (Stable Promotion) ---
     if branch in ["main", "master"]:
         try:
-            # Fetch all branches and tags from remote to see tags from next branch
-            print("INFO: Fetching all refs and tags from remote...")
-            run_git_command(["fetch", "origin"], fail_on_error=False)
+            # Fetch next branch explicitly to get its tags (critical for squash merge)
+            print("INFO: Fetching next branch and all tags from remote...")
+            run_git_command(["fetch", "origin", "next"], fail_on_error=False)
+            run_git_command(["fetch", "origin", "main"], fail_on_error=False)
             run_git_command(["fetch", "--tags", "--force"], fail_on_error=False)
             
             # Get ALL tags from the repository
