@@ -92,28 +92,28 @@ runs:
         target-branch: ${{ github.ref_name }}
         config-file: release-please-config.${{ github.ref_name }}.json
 
-    - name: Reset Manifest After Release
-      if: (github.ref_name == 'main' || github.ref_name == 'master') && env.SKIP_RELEASE != 'true'
-      shell: bash
-      run: |
-        # Configure Git
-        git config user.name "mapcolonies[bot]"
-        git config user.email "devops[bot]@mapcolonies.com"
+    # - name: Reset Manifest After Release
+    #   if: (github.ref_name == 'main' || github.ref_name == 'master') && env.SKIP_RELEASE != 'true'
+    #   shell: bash
+    #   run: |
+    #     # Configure Git
+    #     git config user.name "mapcolonies[bot]"
+    #     git config user.email "devops[bot]@mapcolonies.com"
         
-        # After release, reset manifest to the stable version that was just released
-        TARGET_VER="${{ steps.calc_rc.outputs.next_version }}"
+    #     # After release, reset manifest to the stable version that was just released
+    #     TARGET_VER="${{ steps.calc_rc.outputs.next_version }}"
         
-        if [ -n "$TARGET_VER" ]; then
-          echo "Resetting manifest to stable version: $TARGET_VER"
-          echo "{\".\": \"$TARGET_VER\"}" > .release-please-manifest.json
+    #     if [ -n "$TARGET_VER" ]; then
+    #       echo "Resetting manifest to stable version: $TARGET_VER"
+    #       echo "{\".\": \"$TARGET_VER\"}" > .release-please-manifest.json
           
-          git add .release-please-manifest.json
+    #       git add .release-please-manifest.json
           
-          # Only commit if there are changes
-          if ! git diff --staged --quiet; then
-            git commit -m "chore: reset manifest to stable version"
-            git push "https://x-access-token:${{ inputs.token }}@github.com/${{ github.repository }}.git" ${{ github.ref_name }}
-          else
-            echo "No changes to manifest, skipping commit"
-          fi
-        fi
+    #       # Only commit if there are changes
+    #       if ! git diff --staged --quiet; then
+    #         git commit -m "chore: reset manifest to stable version"
+    #         git push "https://x-access-token:${{ inputs.token }}@github.com/${{ github.repository }}.git" ${{ github.ref_name }}
+    #       else
+    #         echo "No changes to manifest, skipping commit"
+    #       fi
+    #     fi
