@@ -34,15 +34,14 @@ def find_baseline_tag():
     # 1. Fetch all tags from remote to ensure we see tags from all branches
     run_git_command(["fetch", "--tags"], fail_on_error=False)
     
-    # 2. Get only tags that are reachable from current HEAD
-    # This ensures we don't use stable tags from main that aren't in next's history (squash merge issue)
+    # 2. Get ALL tags from the repository
     tags_output = run_git_command(
-        ["tag", "-l", "v*", "--merged", "HEAD"], 
+        ["tag", "-l", "v*"], 
         fail_on_error=False
     )
     
-    if not merged_tags_output:
-        print("INFO: No tags found in current branch history. Assuming 0.0.0 baseline.")
+    if not tags_output:
+        print("INFO: No tags found in repository. Assuming 0.0.0 baseline.")
         return None, True
     
     all_tags = tags_output.split('\n')
@@ -102,7 +101,75 @@ def get_commit_depth(baseline_tag):
     
     return len(real_commits)
 
+def analyze_impact_from_latest_commit(baseline_tag):
+    """
+    Analyze impact based on the LATEST meaningful commit, not all commits.
+    This is critical for squash-and-merge scenarios where we only care about
+    the most recent change type.
+    """
+    rev_range = f"{baseline_tag}..HEAD" if baseline_tag else "HEAD"
+    
+    # Get all commit subjects in chronological order (oldest first)
+    raw_subjects = run_git_command(
+        ["log", rev_range, "--first-parent", "--pretty=format:%s", "--reverse"], 
+        fail_on_error=False
+    )
+    
+    if not raw_subjects:
+        return False, False
+    
+    # Filter out bot/release commits to find the last REAL user commit
+    real_commits = []
+    for s in raw_subjects.split('\n'):
+        # Skip bot commits
+        if BOT_FOOTER_TAG in s or BOT_COMMIT_MSG in s:
+            continue
+        if re.match(r"^chore(\(.*\))?: release", s):
+            continue
+        if "chore: reset manifest to stable version" in s:
+            continue
+        if "chore: update manifest to" in s:
+            continue
+            
+        real_commits.append(s)
+    
+    if not real_commits:
+        print("INFO: No real commits found for impact analysis")
+        return False, False
+    
+    # Get the LAST real commit (most recent)
+    latest_commit = real_commits[-1]
+    print(f"INFO: Analyzing impact from latest commit: '{latest_commit}'")
+    
+    # Also need to check the full body of the latest commit for BREAKING CHANGE
+    latest_commit_body = run_git_command(
+        ["log", "-1", "--pretty=format:%B"], 
+        fail_on_error=False
+    )
+    
+    # Check for breaking change patterns
+    breaking_regex = r"^(feat|fix|refactor)(\(.*\))?!:"
+    is_breaking = (
+        re.search(breaking_regex, latest_commit) or 
+        "BREAKING CHANGE" in latest_commit_body
+    )
+    
+    # Check for feature
+    is_feat = re.search(r"^feat(\(.*\))?:", latest_commit)
+    
+    result_breaking = bool(is_breaking)
+    result_feat = bool(is_feat)
+    
+    print(f"INFO: Latest commit impact - breaking={result_breaking}, feat={result_feat}")
+    
+    return result_breaking, result_feat
+
 def analyze_impact(baseline_tag):
+    """
+    Legacy function - analyzes ALL commits since baseline.
+    Kept for backward compatibility but should use analyze_impact_from_latest_commit
+    for squash scenarios.
+    """
     rev_range = f"{baseline_tag}..HEAD" if baseline_tag else "HEAD"
     logs = run_git_command(["log", rev_range, "--pretty=format:%B"], fail_on_error=False)
     
@@ -220,7 +287,9 @@ def main():
             return
 
         major, minor, patch, rc = parse_semver(tag)
-        is_breaking, is_feat = analyze_impact(tag)
+        
+        # KEY FIX: Use latest commit analysis for squash scenarios
+        is_breaking, is_feat = analyze_impact_from_latest_commit(tag)
 
         print(f"INFO: Baseline version: {tag or '0.0.0'} (from_stable={from_stable})")
         print(f"INFO: Impact analysis - breaking={is_breaking}, feat={is_feat}, depth={depth}")
