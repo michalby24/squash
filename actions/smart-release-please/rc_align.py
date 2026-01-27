@@ -169,8 +169,10 @@ def main():
     # --- LOGIC FOR MAIN (Stable Promotion) ---
     if branch in ["main", "master"]:
         try:
-            # Fetch all tags from remote first
-            run_git_command(["fetch", "--tags"], fail_on_error=False)
+            # Fetch all branches and tags from remote to see tags from next branch
+            print("INFO: Fetching all refs and tags from remote...")
+            run_git_command(["fetch", "origin"], fail_on_error=False)
+            run_git_command(["fetch", "--tags", "--force"], fail_on_error=False)
             
             # Get ALL tags from the repository
             tags_output = run_git_command(["tag", "-l", "v*"], fail_on_error=False)
@@ -188,10 +190,13 @@ def main():
 
                 latest_tag = sorted(all_tags, key=version_key, reverse=True)[0]
                 print(f"INFO: Latest tag found: {latest_tag}")
+                print(f"DEBUG: All tags sorted: {sorted(all_tags, key=version_key, reverse=True)[:5]}")
                 
                 # Strip RC suffix to get stable version
-                clean_tag = re.sub(r'-rc\.\d+$', '', latest_tag)
+                # Handle both -rc.X and -rcX formats
+                clean_tag = re.sub(r'-rc(\.\d+)?$', '', latest_tag)
                 stable_version = clean_tag.lstrip('v')
+                print(f"INFO: After stripping RC from '{latest_tag}': '{clean_tag}'")
                 print(f"INFO: Promoting to stable: {stable_version}")
 
             with open(os.environ["GITHUB_OUTPUT"], "a") as f:
