@@ -2,7 +2,7 @@ name: Sync Main to Next (Hard Reset)
 description: "Forcefully resets 'next' to match 'main' after a release to ensure tags are synced and conflicts are ignored."
 
 on:
-  # workflow_dispatch:
+  workflow_dispatch:
   # Trigger when a Release is published
   release:
     types: [published]
