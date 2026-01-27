@@ -10,6 +10,19 @@
 
 ### Miscellaneous Chores
 
+* enforce correct rc version ([73c33b6](https://github.com/michalby24/squash/commit/73c33b6ee52add4d3281beaa9531ee81793714b7))
+* enforce correct rc version ([bdf361e](https://github.com/michalby24/squash/commit/bdf361e6e4b8b3a150097016e7274b2a3e81dc34))
+
+## [0.7.0](https://github.com/michalby24/squash/compare/v0.7.0...v0.7.0) (2026-01-27)
+
+
+### Features
+
+* next ([#164](https://github.com/michalby24/squash/issues/164)) ([bed2745](https://github.com/michalby24/squash/commit/bed2745bc63da3cd6ab9df4657d4ba84ba7eac04))
+
+
+### Miscellaneous Chores
+
 * enforce correct rc version ([bdf361e](https://github.com/michalby24/squash/commit/bdf361e6e4b8b3a150097016e7274b2a3e81dc34))
 
 ## [0.7.0-rc.16](https://github.com/michalby24/squash/compare/v0.7.0-rc.13...v0.7.0-rc.16) (2026-01-27)
