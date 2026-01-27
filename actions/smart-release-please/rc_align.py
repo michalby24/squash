@@ -31,24 +31,19 @@ def parse_semver(tag):
     return 0, 0, 0, 0
 
 def find_baseline_tag():
-    # 1. Fetch all tags from remote to ensure we see tags from all branches
-    run_git_command(["fetch", "--tags"], fail_on_error=False)
+    # 1. Fetch all tags from remote to see tags from all branches
+    run_git_command(["fetch", "--tags", "--force"], fail_on_error=False)
     
-    # 2. Get ALL tags from the repository
-    tags_output = run_git_command(
-        ["tag", "-l", "v*"], 
-        fail_on_error=False
-    )
+    # 2. Get ALL tags from the entire repository (across all branches)
+    all_tags_output = run_git_command(["tag", "-l", "v*"], fail_on_error=False)
     
-    if not tags_output:
+    if not all_tags_output:
         print("INFO: No tags found in repository. Assuming 0.0.0 baseline.")
         return None, True
     
-    all_tags = tags_output.split('\n')
+    all_tags = all_tags_output.split('\n')
     
-    # 2. Python-side Sort (Reliable SemVer)
-    # Returns tuple: (major, minor, patch, is_stable, rc_num)
-    # is_stable is 1 for Stable, 0 for RC. This GUARANTEES Stable > RC for same version.
+    # 3. Python-side Sort (Reliable SemVer)
     def version_key(t):
         maj, min, pat, rc = parse_semver(t)
         is_stable = 1 if "-rc" not in t else 0
@@ -56,11 +51,9 @@ def find_baseline_tag():
 
     # Sort descending (Highest version first)
     sorted_tags = sorted(all_tags, key=version_key, reverse=True)
-    
     best_tag = sorted_tags[0]
 
-    # Debug output to verify what we found
-    print(f"DEBUG: Top 3 tags found: {sorted_tags[:3]}")
+    print(f"DEBUG: Latest tag across all branches: {best_tag}")
 
     if "-rc" in best_tag:
         print(f"INFO: Baseline found (RC): {best_tag}")
@@ -169,13 +162,12 @@ def main():
     # --- LOGIC FOR MAIN (Stable Promotion) ---
     if branch in ["main", "master"]:
         try:
-            # Fetch next branch explicitly to get its tags (critical for squash merge)
+            # Fetch all tags from remote first to ensure we see tags from merged branches
             print("INFO: Fetching next branch and all tags from remote...")
             run_git_command(["fetch", "origin", "next"], fail_on_error=False)
-            run_git_command(["fetch", "origin", "main"], fail_on_error=False)
             run_git_command(["fetch", "--tags", "--force"], fail_on_error=False)
             
-            # Get ALL tags from the repository
+            # Get ALL tags (not just merged) to see tags from next branch
             tags_output = run_git_command(["tag", "-l", "v*"], fail_on_error=False)
             
             if not tags_output:
@@ -191,14 +183,11 @@ def main():
 
                 latest_tag = sorted(all_tags, key=version_key, reverse=True)[0]
                 print(f"INFO: Latest tag found: {latest_tag}")
-                print(f"DEBUG: All tags sorted: {sorted(all_tags, key=version_key, reverse=True)[:5]}")
                 
                 # Strip RC suffix to get stable version
-                # Handle both -rc.X and -rcX formats
-                clean_tag = re.sub(r'-rc(\.\d+)?$', '', latest_tag)
+                clean_tag = re.sub(r'-rc.*', '', latest_tag)
                 stable_version = clean_tag.lstrip('v')
-                print(f"INFO: After stripping RC from '{latest_tag}': '{clean_tag}'")
-                print(f"INFO: Promoting to stable: {stable_version}")
+                print(f"INFO: Promoting to stable {stable_version}")
 
             with open(os.environ["GITHUB_OUTPUT"], "a") as f:
                 f.write(f"next_version={stable_version}\n")
