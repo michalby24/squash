@@ -26,6 +26,23 @@ runs:
       shell: bash
       run: python3 "${{ github.action_path }}/rc_align.py"
 
+    - name: Update Manifest for Main Branch
+      if: (github.ref_name == 'main' || github.ref_name == 'master') && steps.calc_rc.outputs.next_version != ''
+      shell: bash
+      run: |
+        TARGET_VER="${{ steps.calc_rc.outputs.next_version }}"
+        echo "Updating manifest to version: $TARGET_VER"
+        echo "{\".\": \"$TARGET_VER\"}" > .release-please-manifest.json
+        
+        git config user.name "mapcolonies[bot]"
+        git config user.email "devops[bot]@mapcolonies.com"
+        git add .release-please-manifest.json
+        
+        if ! git diff --staged --quiet; then
+          git commit -m "chore: update manifest to $TARGET_VER for stable release"
+          git push "https://x-access-token:${{ inputs.token }}@github.com/${{ github.repository }}.git" ${{ github.ref_name }}
+        fi
+
     - name: Inject Release-As Footer
       if: >-
         ${{ 
@@ -91,29 +108,3 @@ runs:
         token: ${{ inputs.token }}
         target-branch: ${{ github.ref_name }}
         config-file: release-please-config.${{ github.ref_name }}.json
-
-    # - name: Reset Manifest After Release
-    #   if: (github.ref_name == 'main' || github.ref_name == 'master') && env.SKIP_RELEASE != 'true'
-    #   shell: bash
-    #   run: |
-    #     # Configure Git
-    #     git config user.name "mapcolonies[bot]"
-    #     git config user.email "devops[bot]@mapcolonies.com"
-        
-    #     # After release, reset manifest to the stable version that was just released
-    #     TARGET_VER="${{ steps.calc_rc.outputs.next_version }}"
-        
-    #     if [ -n "$TARGET_VER" ]; then
-    #       echo "Resetting manifest to stable version: $TARGET_VER"
-    #       echo "{\".\": \"$TARGET_VER\"}" > .release-please-manifest.json
-          
-    #       git add .release-please-manifest.json
-          
-    #       # Only commit if there are changes
-    #       if ! git diff --staged --quiet; then
-    #         git commit -m "chore: reset manifest to stable version"
-    #         git push "https://x-access-token:${{ inputs.token }}@github.com/${{ github.repository }}.git" ${{ github.ref_name }}
-    #       else
-    #         echo "No changes to manifest, skipping commit"
-    #       fi
-    #     fi
