@@ -12,6 +12,18 @@
 
 * enforce correct rc version ([d5b4304](https://github.com/michalby24/squash/commit/d5b43045083b8bbcecb3a19bccfecce916aba080))
 
+## [0.5.2](https://github.com/michalby24/squash/compare/v0.5.2-rc.1...v0.5.2) (2026-01-27)
+
+
+### Bug Fixes
+
+* next ([b1e794d](https://github.com/michalby24/squash/commit/b1e794db76639e0015380a110a57e6878c1f6930))
+
+
+### Miscellaneous Chores
+
+* enforce correct rc version ([d5b4304](https://github.com/michalby24/squash/commit/d5b43045083b8bbcecb3a19bccfecce916aba080))
+
 ## [0.5.2-rc.1](https://github.com/michalby24/squash/compare/v0.5.1-rc.1...v0.5.2-rc.1) (2026-01-27)
 
 
