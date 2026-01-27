@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.0-rc.1](https://github.com/michalby24/squash/compare/v0.8.0-rc.1...v0.9.0-rc.1) (2026-01-27)
+
+
+### Features
+
+* test ([e702013](https://github.com/michalby24/squash/commit/e702013c41aa5a14ad8562d8379471e161837945))
+
 ## [0.8.0-rc.1](https://github.com/michalby24/squash/compare/v0.7.3-rc.1...v0.8.0-rc.1) (2026-01-27)
 
 
