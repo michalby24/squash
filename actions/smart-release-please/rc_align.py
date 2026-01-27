@@ -34,35 +34,44 @@ def find_baseline_tag():
     # 1. Fetch all tags from remote to see tags from all branches
     run_git_command(["fetch", "--tags", "--force"], fail_on_error=False)
     
-    # 2. Get tags reachable from HEAD (in current branch history)
-    tags_output = run_git_command(
+    # 2. Get ALL tags from the entire repository
+    all_tags_output = run_git_command(["tag", "-l", "v*"], fail_on_error=False)
+    
+    # 3. Get tags reachable from HEAD (in current branch history)
+    merged_tags_output = run_git_command(
         ["tag", "-l", "v*", "--merged", "HEAD"], 
         fail_on_error=False
     )
     
-    if not tags_output:
+    if not merged_tags_output:
         print("INFO: No tags found in current branch history. Assuming 0.0.0 baseline.")
         return None, True
     
-    all_tags = tags_output.split('\n')
+    merged_tags = merged_tags_output.split('\n')
+    all_tags = all_tags_output.split('\n') if all_tags_output else []
     
-    # 3. Python-side Sort (Reliable SemVer)
-    # Returns tuple: (major, minor, patch, is_stable, rc_num)
-    # is_stable is 1 for Stable, 0 for RC. This GUARANTEES Stable > RC for same version.
+    # 4. Python-side Sort (Reliable SemVer)
     def version_key(t):
         maj, min, pat, rc = parse_semver(t)
         is_stable = 1 if "-rc" not in t else 0
         return (maj, min, pat, is_stable, rc)
 
     # Sort descending (Highest version first)
-    sorted_tags = sorted(all_tags, key=version_key, reverse=True)
-    
-    best_tag = sorted_tags[0]
+    sorted_merged = sorted(merged_tags, key=version_key, reverse=True)
+    best_tag = sorted_merged[0]
 
-    # Debug output to verify what we found
-    print(f"DEBUG: Top 3 tags found: {sorted_tags[:3]}")
+    print(f"DEBUG: Top 3 tags in branch history: {sorted_merged[:3]}")
 
+    # 5. Special check: If best tag is RC, check if matching stable exists in repo
     if "-rc" in best_tag:
+        maj, min, pat, _ = parse_semver(best_tag)
+        matching_stable = f"v{maj}.{min}.{pat}"
+        
+        if matching_stable in all_tags:
+            print(f"INFO: Found matching stable release {matching_stable} in repo (not in branch history)")
+            print(f"INFO: Baseline found (Stable): {matching_stable}")
+            return matching_stable, True
+        
         print(f"INFO: Baseline found (RC): {best_tag}")
         return best_tag, False
     
