@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.5.5-rc.7](https://github.com/michalby24/squash/compare/v0.5.5-rc.5...v0.5.5-rc.7) (2026-01-27)
+
+
+### Bug Fixes
+
+* enhance tag fetching logic and improve stable version promotion ([3803e81](https://github.com/michalby24/squash/commit/3803e81726a35cce4cf2153e7b8ff75f4e5d0806))
+
+
+### Miscellaneous Chores
+
+* enforce correct rc version ([ef58bb1](https://github.com/michalby24/squash/commit/ef58bb1f72fb47aacb829cb6159ccfdcee988a35))
+
 ## [0.5.5-rc.5](https://github.com/michalby24/squash/compare/v0.5.5-rc.3...v0.5.5-rc.5) (2026-01-27)
 
 
