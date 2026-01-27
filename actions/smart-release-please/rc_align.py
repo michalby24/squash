@@ -31,14 +31,17 @@ def parse_semver(tag):
     return 0, 0, 0, 0
 
 def find_baseline_tag():
-    # 1. Fetch ALL tags reachable from HEAD
+    # 1. Fetch all tags from remote to ensure we see tags from all branches
+    run_git_command(["fetch", "--tags"], fail_on_error=False)
+    
+    # 2. Get ALL tags from the repository
     tags_output = run_git_command(
-        ["tag", "-l", "v*", "--merged", "HEAD"], 
+        ["tag", "-l", "v*"], 
         fail_on_error=False
     )
     
     if not tags_output:
-        print("INFO: No tags found in current branch history. Assuming 0.0.0 baseline.")
+        print("INFO: No tags found in repository. Assuming 0.0.0 baseline.")
         return None, True
     
     all_tags = tags_output.split('\n')
