@@ -31,17 +31,14 @@ def parse_semver(tag):
     return 0, 0, 0, 0
 
 def find_baseline_tag():
-    # 1. Fetch all tags from remote to ensure we see tags from all branches
-    run_git_command(["fetch", "--tags"], fail_on_error=False)
-    
-    # 2. Get ALL tags from the repository
+    # 1. Fetch ALL tags reachable from HEAD
     tags_output = run_git_command(
-        ["tag", "-l", "v*"], 
+        ["tag", "-l", "v*", "--merged", "HEAD"], 
         fail_on_error=False
     )
     
     if not tags_output:
-        print("INFO: No tags found in repository. Assuming 0.0.0 baseline.")
+        print("INFO: No tags found in current branch history. Assuming 0.0.0 baseline.")
         return None, True
     
     all_tags = tags_output.split('\n')
@@ -169,13 +166,12 @@ def main():
     # --- LOGIC FOR MAIN (Stable Promotion) ---
     if branch in ["main", "master"]:
         try:
-            # Fetch next branch explicitly to get its tags (critical for squash merge)
+            # Fetch all tags from remote first to ensure we see tags from merged branches
             print("INFO: Fetching next branch and all tags from remote...")
             run_git_command(["fetch", "origin", "next"], fail_on_error=False)
-            run_git_command(["fetch", "origin", "main"], fail_on_error=False)
             run_git_command(["fetch", "--tags", "--force"], fail_on_error=False)
             
-            # Get ALL tags from the repository
+            # Get ALL tags (not just merged) to see tags from next branch
             tags_output = run_git_command(["tag", "-l", "v*"], fail_on_error=False)
             
             if not tags_output:
@@ -191,14 +187,11 @@ def main():
 
                 latest_tag = sorted(all_tags, key=version_key, reverse=True)[0]
                 print(f"INFO: Latest tag found: {latest_tag}")
-                print(f"DEBUG: All tags sorted: {sorted(all_tags, key=version_key, reverse=True)[:5]}")
                 
                 # Strip RC suffix to get stable version
-                # Handle both -rc.X and -rcX formats
-                clean_tag = re.sub(r'-rc(\.\d+)?$', '', latest_tag)
+                clean_tag = re.sub(r'-rc.*', '', latest_tag)
                 stable_version = clean_tag.lstrip('v')
-                print(f"INFO: After stripping RC from '{latest_tag}': '{clean_tag}'")
-                print(f"INFO: Promoting to stable: {stable_version}")
+                print(f"INFO: Promoting to stable {stable_version}")
 
             with open(os.environ["GITHUB_OUTPUT"], "a") as f:
                 f.write(f"next_version={stable_version}\n")
