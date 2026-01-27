@@ -31,7 +31,10 @@ def parse_semver(tag):
     return 0, 0, 0, 0
 
 def find_baseline_tag():
-    # 1. Fetch ALL tags reachable from HEAD
+    # 1. Fetch all tags from remote to see tags from all branches
+    run_git_command(["fetch", "--tags", "--force"], fail_on_error=False)
+    
+    # 2. Get tags reachable from HEAD (in current branch history)
     tags_output = run_git_command(
         ["tag", "-l", "v*", "--merged", "HEAD"], 
         fail_on_error=False
@@ -43,7 +46,7 @@ def find_baseline_tag():
     
     all_tags = tags_output.split('\n')
     
-    # 2. Python-side Sort (Reliable SemVer)
+    # 3. Python-side Sort (Reliable SemVer)
     # Returns tuple: (major, minor, patch, is_stable, rc_num)
     # is_stable is 1 for Stable, 0 for RC. This GUARANTEES Stable > RC for same version.
     def version_key(t):
