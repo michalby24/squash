@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.5.4-rc.8](https://github.com/michalby24/squash/compare/v0.5.4-rc.5...v0.5.4-rc.8) (2026-01-27)
+
+
+### Bug Fixes
+
+* next ([#112](https://github.com/michalby24/squash/issues/112)) ([1fd1098](https://github.com/michalby24/squash/commit/1fd10984679d62d9df661f6cb6c6215766bce1de))
+* reset manifest to stable version after release on main branch ([c80d043](https://github.com/michalby24/squash/commit/c80d04383cc055da059a2583b9cc10a5c00ac132))
+
+
+### Miscellaneous Chores
+
+* enforce correct rc version ([e751913](https://github.com/michalby24/squash/commit/e751913752582796546429c239260996c09105c1))
+
 ## [0.5.4-rc.5](https://github.com/michalby24/squash/compare/v0.5.4-rc.3...v0.5.4-rc.5) (2026-01-27)
 
 
