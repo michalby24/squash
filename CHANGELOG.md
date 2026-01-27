@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.6.0-rc.10](https://github.com/michalby24/squash/compare/v0.6.0-rc.7...v0.6.0-rc.10) (2026-01-27)
+
+
+### Bug Fixes
+
+* improve tag fetching logic and messages in rc_align.py ([4a882dc](https://github.com/michalby24/squash/commit/4a882dcbe8a10fa47a17230b52af49e217121274))
+* test ([040127b](https://github.com/michalby24/squash/commit/040127b012eba8c958e973f3c039fbd3309f7375))
+
+
+### Miscellaneous Chores
+
+* enforce correct rc version ([7eab6dc](https://github.com/michalby24/squash/commit/7eab6dc62e01d112f5199625fb64427113491aa4))
+* enforce correct rc version ([64c7de8](https://github.com/michalby24/squash/commit/64c7de8ebe64ff6a4a619c6526e84cd4c0dbf6c1))
+
 ## [0.6.0-rc.7](https://github.com/michalby24/squash/compare/v0.5.7-rc.5...v0.6.0-rc.7) (2026-01-27)
 
 
