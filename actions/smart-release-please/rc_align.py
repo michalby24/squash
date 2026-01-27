@@ -183,25 +183,37 @@ def analyze_impact(baseline_tag):
     return bool(is_breaking), bool(is_feat)
 
 def calculate_next_version(major, minor, patch, rc, depth, is_breaking, is_feat, from_stable):
-    # Logic:
-    # If Breaking -> major+1.0.0
-    # If Feature  -> minor+1.0 (if from stable) OR current.minor.patch (if working on RC)
-    # If Fix      -> patch+1   (if from stable) OR current rc increment
+    """
+    Calculate the next version based on commit impact and baseline state.
     
+    KEY FIX: When coming from stable, ALWAYS start with -rc.1 (not -rc.{depth})
+    Only increment the RC number when already on an RC tag.
+    """
+    
+    # If Breaking -> major+1.0.0-rc.1
     if is_breaking:
-        return f"{major + 1}.0.0-rc.{depth}"
+        return f"{major + 1}.0.0-rc.1"
     
+    # If Feature
     if is_feat:
-        if from_stable or patch > 0:
-            return f"{major}.{minor + 1}.0-rc.{depth}"
+        if from_stable:
+            # From stable v0.1.0 → v0.2.0-rc.1 (always start with rc.1)
+            return f"{major}.{minor + 1}.0-rc.1"
         else:
-            return f"{major}.{minor}.{patch}-rc.{rc + depth}"
+            # Already on RC, check if we need to bump minor or just increment RC
+            if patch > 0:
+                # We're on something like 0.1.1-rc.3, new feat bumps to 0.2.0-rc.1
+                return f"{major}.{minor + 1}.0-rc.1"
+            else:
+                # We're on something like 0.2.0-rc.3, stay on 0.2.0 and increment RC
+                return f"{major}.{minor}.{patch}-rc.{rc + depth}"
 
+    # If Fix (or any other change)
     if from_stable:
-        # Came from v0.1.1 -> Next is 0.1.2-rc.X
-        return f"{major}.{minor}.{patch + 1}-rc.{depth}"
+        # From stable v0.1.0 → v0.1.1-rc.1 (always start with rc.1)
+        return f"{major}.{minor}.{patch + 1}-rc.1"
     else:
-        # Came from v0.1.1-rc.11 -> Next is 0.1.1-rc.12+depth
+        # Already on RC v0.1.1-rc.3 → v0.1.1-rc.{3+depth}
         return f"{major}.{minor}.{patch}-rc.{rc + depth}"
 
 def main():
