@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.7.0-rc.12](https://github.com/michalby24/squash/compare/v0.6.0-rc.7...v0.7.0-rc.12) (2026-01-27)
+
+
+### Bug Fixes
+
+* improve tag fetching logic and handling in find_baseline_tag function ([6135d7c](https://github.com/michalby24/squash/commit/6135d7c1e4b1bf2630116b7f21856a2253425da5))
+* improve tag fetching logic and messages in rc_align.py ([4a882dc](https://github.com/michalby24/squash/commit/4a882dcbe8a10fa47a17230b52af49e217121274))
+* test ([040127b](https://github.com/michalby24/squash/commit/040127b012eba8c958e973f3c039fbd3309f7375))
+* update comments for clarity in find_baseline_tag function ([8110272](https://github.com/michalby24/squash/commit/81102725efe9f25f5547efbff53aff5fad3a23db))
+
+
+### Miscellaneous Chores
+
+* enforce correct rc version ([1860cd3](https://github.com/michalby24/squash/commit/1860cd3502883f848045fd05616f956539a63ab7))
+* enforce correct rc version ([0b54be7](https://github.com/michalby24/squash/commit/0b54be70e5387ca8093d2177b86b80053f5c8f5f))
+* enforce correct rc version ([7eab6dc](https://github.com/michalby24/squash/commit/7eab6dc62e01d112f5199625fb64427113491aa4))
+* enforce correct rc version ([64c7de8](https://github.com/michalby24/squash/commit/64c7de8ebe64ff6a4a619c6526e84cd4c0dbf6c1))
+
 ## [0.6.0-rc.7](https://github.com/michalby24/squash/compare/v0.5.7-rc.5...v0.6.0-rc.7) (2026-01-27)
 
 
