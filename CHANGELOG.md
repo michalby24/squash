@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.7.2-rc.4](https://github.com/michalby24/squash/compare/v0.7.2-rc.1...v0.7.2-rc.4) (2026-01-27)
+
+
+### Bug Fixes
+
+* test ([0d0fdf1](https://github.com/michalby24/squash/commit/0d0fdf18388b2ca6c36ef6c7f9929122be63bdd7))
+
+
+### Miscellaneous Chores
+
+* enforce correct rc version ([7b06f17](https://github.com/michalby24/squash/commit/7b06f17f74cdaba4346cb7ae3aed6ba0638cbe5b))
+* enforce correct rc version ([ddd83a0](https://github.com/michalby24/squash/commit/ddd83a09e9a08e9120a2d7790f12b5142b128d41))
+
 ## [0.7.2-rc.1](https://github.com/michalby24/squash/compare/v0.7.1...v0.7.2-rc.1) (2026-01-27)
 
 
