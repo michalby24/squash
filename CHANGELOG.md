@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.5.4-rc.5](https://github.com/michalby24/squash/compare/v0.5.4-rc.3...v0.5.4-rc.5) (2026-01-27)
+
+
+### Bug Fixes
+
+* update stable version promotion logic using manifest file ([f7799ce](https://github.com/michalby24/squash/commit/f7799ce2303a568038dfb067e036a6d71ae1cfc6))
+
+
+### Miscellaneous Chores
+
+* enforce correct rc version ([dc00c4b](https://github.com/michalby24/squash/commit/dc00c4b3d6e0f299c5ec224fb6d897abec3782fa))
+
 ## [0.5.4-rc.3](https://github.com/michalby24/squash/compare/v0.5.4-rc.1...v0.5.4-rc.3) (2026-01-27)
 
 
