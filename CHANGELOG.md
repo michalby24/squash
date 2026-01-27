@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.5.5-rc.5](https://github.com/michalby24/squash/compare/v0.5.5-rc.3...v0.5.5-rc.5) (2026-01-27)
+
+
+### Bug Fixes
+
+* improve stable version promotion logic in main function ([98c9307](https://github.com/michalby24/squash/commit/98c9307a9c4c871d034c69a5c809ccb373f18a4d))
+
+
+### Miscellaneous Chores
+
+* enforce correct rc version ([e816aae](https://github.com/michalby24/squash/commit/e816aae925ab2deb4ce04d5a118ae589c2fb9cb3))
+
 ## [0.5.5-rc.3](https://github.com/michalby24/squash/compare/v0.5.4-rc.8...v0.5.5-rc.3) (2026-01-27)
 
 
