@@ -41,7 +41,7 @@ def find_baseline_tag():
         fail_on_error=False
     )
     
-    if not tags_output:
+    if not merged_tags_output:
         print("INFO: No tags found in current branch history. Assuming 0.0.0 baseline.")
         return None, True
     
@@ -59,7 +59,16 @@ def find_baseline_tag():
 
     print(f"DEBUG: Latest tag across all branches: {best_tag}")
 
+    # 5. Special check: If best tag is RC, check if matching stable exists in repo
     if "-rc" in best_tag:
+        maj, min, pat, _ = parse_semver(best_tag)
+        matching_stable = f"v{maj}.{min}.{pat}"
+        
+        if matching_stable in all_tags:
+            print(f"INFO: Found matching stable release {matching_stable} in repo (not in branch history)")
+            print(f"INFO: Baseline found (Stable): {matching_stable}")
+            return matching_stable, True
+        
         print(f"INFO: Baseline found (RC): {best_tag}")
         return best_tag, False
     
