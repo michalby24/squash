@@ -74,6 +74,68 @@
 * enforce correct rc version ([b868eeb](https://github.com/michalby24/squash/commit/b868eebd21c345eac87bfd5c3c14b942c3a04a1d))
 * enforce correct rc version ([db6b8fc](https://github.com/michalby24/squash/commit/db6b8fc46f58abac2311089326c7e7a075889721))
 
+## [0.8.1-rc.1](https://github.com/michalby24/squash/compare/v0.8.0-rc.2...v0.8.1-rc.1) (2026-01-27)
+
+
+### Bug Fixes
+
+* streamline version parsing and commit analysis logic ([8c1b771](https://github.com/michalby24/squash/commit/8c1b771fc6570a4c2532460c5725a4bfeef7713d))
+* test ([dc5cc1a](https://github.com/michalby24/squash/commit/dc5cc1a4c07bcf5e6c0732f3aae4c181bb4b65f7))
+
+
+### Miscellaneous Chores
+
+* enforce correct rc version ([d58e639](https://github.com/michalby24/squash/commit/d58e63943421b28493992c422cdc50a275f8a183))
+* enforce correct rc version ([49779d6](https://github.com/michalby24/squash/commit/49779d6e768eebf6068203d038b8e0723386f51d))
+
+## [0.8.0-rc.2](https://github.com/michalby24/squash/compare/v0.8.0-rc.1...v0.8.0-rc.2) (2026-01-27)
+
+
+### Features
+
+* test ([e702013](https://github.com/michalby24/squash/commit/e702013c41aa5a14ad8562d8379471e161837945))
+
+
+### Miscellaneous Chores
+
+* enforce correct rc version ([e51964c](https://github.com/michalby24/squash/commit/e51964c2000fbda045cdf1d37228b096bf57d818))
+
+## [0.8.0-rc.1](https://github.com/michalby24/squash/compare/v0.7.3-rc.1...v0.8.0-rc.1) (2026-01-27)
+
+
+### Features
+
+* test ([61a7531](https://github.com/michalby24/squash/commit/61a7531368a665172701e91f0ba1ba9c4555c343))
+* test ([388b657](https://github.com/michalby24/squash/commit/388b6571d6374a7dd8bb828849b5aca7b69e19b6))
+
+
+### Bug Fixes
+
+* test ([1968b28](https://github.com/michalby24/squash/commit/1968b289cf7ff4f60454bfa3231fcf029df30e0d))
+* test ([dab7bcf](https://github.com/michalby24/squash/commit/dab7bcfccb03d8499f6c9a9a22ae72c404fe0fc7))
+
+
+### Miscellaneous Chores
+
+* enforce correct rc version ([bc7e457](https://github.com/michalby24/squash/commit/bc7e45754e27d35c1299a98a8304feda22ef95c1))
+* enforce correct rc version ([43ff616](https://github.com/michalby24/squash/commit/43ff616500378336a338b0f2921e8dad100c7f7f))
+* enforce correct rc version ([742bc58](https://github.com/michalby24/squash/commit/742bc5896efaec3201b21f2ce6e3fa57df2c6ff8))
+* enforce correct rc version ([cfdefdd](https://github.com/michalby24/squash/commit/cfdefddd7f63480a28412a23b68aeefdd92bf9b2))
+
+## [0.7.3-rc.1](https://github.com/michalby24/squash/compare/v0.7.2-rc.4...v0.7.3-rc.1) (2026-01-27)
+
+
+### Bug Fixes
+
+* adjust version calculation for stable to always start with -rc.1 ([81bcdcf](https://github.com/michalby24/squash/commit/81bcdcf13d166735c893b5fa69cd916eaa928fc0))
+* test ([b90ddf5](https://github.com/michalby24/squash/commit/b90ddf580c74f1936971913113164f9366bac0b5))
+
+
+### Miscellaneous Chores
+
+* enforce correct rc version ([b868eeb](https://github.com/michalby24/squash/commit/b868eebd21c345eac87bfd5c3c14b942c3a04a1d))
+* enforce correct rc version ([db6b8fc](https://github.com/michalby24/squash/commit/db6b8fc46f58abac2311089326c7e7a075889721))
+
 ## [0.8.0-rc.2](https://github.com/michalby24/squash/compare/v0.8.0-rc.1...v0.8.0-rc.2) (2026-01-27)
 
 
