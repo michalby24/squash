@@ -4,8 +4,8 @@ description: "Forcefully resets 'next' to match 'main' after a release to ensure
 on:
   workflow_dispatch:
   # Trigger when a Release is published
-  release:
-    types: [published]
+  # release:
+  #   types: [published]
 
 jobs:
   reset-next-to-main:
