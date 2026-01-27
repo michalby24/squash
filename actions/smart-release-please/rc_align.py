@@ -169,23 +169,30 @@ def main():
     # --- LOGIC FOR MAIN (Stable Promotion) ---
     if branch in ["main", "master"]:
         try:
-            import json
+            # Fetch all tags from remote first
+            run_git_command(["fetch", "--tags"], fail_on_error=False)
             
-            manifest_path = ".release-please-manifest.json"
+            # Get ALL tags from the repository
+            tags_output = run_git_command(["tag", "-l", "v*"], fail_on_error=False)
             
-            # Read the manifest file (brought in from next branch merge)
-            if os.path.exists(manifest_path):
-                with open(manifest_path, 'r') as f:
-                    manifest = json.load(f)
-                    manifest_version = manifest.get(".", "0.1.0")
-                    print(f"INFO: Manifest version: {manifest_version}")
+            if not tags_output:
+                stable_version = "0.1.0"
+                print(f"INFO: No tags found, defaulting to {stable_version}")
             else:
-                manifest_version = "0.1.0"
-                print(f"INFO: No manifest found, defaulting to {manifest_version}")
-            
-            # Strip RC suffix to get stable version
-            stable_version = re.sub(r'-rc\.\d+$', '', manifest_version)
-            print(f"INFO: Promoting to stable: {stable_version}")
+                all_tags = tags_output.split('\n')
+                # Reuse sort logic
+                def version_key(t):
+                    maj, min, pat, rc = parse_semver(t)
+                    is_stable = 1 if "-rc" not in t else 0
+                    return (maj, min, pat, is_stable, rc)
+
+                latest_tag = sorted(all_tags, key=version_key, reverse=True)[0]
+                print(f"INFO: Latest tag found: {latest_tag}")
+                
+                # Strip RC suffix to get stable version
+                clean_tag = re.sub(r'-rc\.\d+$', '', latest_tag)
+                stable_version = clean_tag.lstrip('v')
+                print(f"INFO: Promoting to stable: {stable_version}")
 
             with open(os.environ["GITHUB_OUTPUT"], "a") as f:
                 f.write(f"next_version={stable_version}\n")
