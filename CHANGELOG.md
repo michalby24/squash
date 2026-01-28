@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.10.1-rc.1](https://github.com/michalby24/squash/compare/v0.10.0-rc.1...v0.10.1-rc.1) (2026-01-28)
+
+
+### Bug Fixes
+
+* clean up debug prints and simplify commit filtering logic ([842c558](https://github.com/michalby24/squash/commit/842c55882672ee62cbbeed1f82a914da9987dda7))
+
+
+### Miscellaneous Chores
+
+* enforce correct rc version ([b4cfafa](https://github.com/michalby24/squash/commit/b4cfafa7fde8767677de8cdc34176030584fd937))
+
 ## [0.10.0-rc.1](https://github.com/michalby24/squash/compare/v0.9.1-rc.2...v0.10.0-rc.1) (2026-01-28)
 
 
