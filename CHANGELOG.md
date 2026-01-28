@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.10.0-rc.1](https://github.com/michalby24/squash/compare/v0.9.1-rc.2...v0.10.0-rc.1) (2026-01-28)
+
+
+### Features
+
+* update action descriptions and improve git identity configuration ([26e4002](https://github.com/michalby24/squash/commit/26e40028569c15a3b6cfd28ad677be11421b1676))
+
+
+### Miscellaneous Chores
+
+* enforce correct rc version ([fc56e69](https://github.com/michalby24/squash/commit/fc56e69b611696ca24937c728157f030018fba99))
+
 ## [0.9.1-rc.2](https://github.com/michalby24/squash/compare/v0.9.1-rc.1...v0.9.1-rc.2) (2026-01-28)
 
 
