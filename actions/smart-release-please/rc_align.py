@@ -45,8 +45,6 @@ def find_baseline_tag():
     sorted_tags = sorted(all_tags, key=version_key, reverse=True)
     best_tag = sorted_tags[0]
     
-    print(f"DEBUG: Top 3 tags: {sorted_tags[:3]}")
-    
     if "-rc" in best_tag:
         print(f"INFO: Baseline (RC): {best_tag}")
         return best_tag, False
@@ -63,7 +61,7 @@ def get_commit_depth(baseline_tag):
     
     real_commits = []
     for s in raw_subjects.split('\n'):
-        if any(x in s for x in [BOT_FOOTER_TAG, BOT_COMMIT_MSG, "chore: reset manifest", "chore: update manifest"]):
+        if any(x in s for x in [BOT_FOOTER_TAG, BOT_COMMIT_MSG]):
             continue
         if re.match(r"^chore(\(.*\))?: release", s):
             continue
@@ -81,7 +79,7 @@ def analyze_impact_from_latest(baseline_tag):
     
     real_commits = []
     for s in raw_subjects.split('\n'):
-        if any(x in s for x in [BOT_FOOTER_TAG, BOT_COMMIT_MSG, "chore: reset manifest", "chore: update manifest"]):
+        if any(x in s for x in [BOT_FOOTER_TAG, BOT_COMMIT_MSG]):
             continue
         if re.match(r"^chore(\(.*\))?: release", s):
             continue
@@ -121,8 +119,6 @@ def calculate_next_version(major, minor, patch, rc, depth, is_breaking, is_feat,
 
 def main():
     branch = os.environ.get("GITHUB_REF_NAME")
-    print(f"INFO: Running on branch: {branch}")
-    
     last_commit = run_git_command(["log", "-1", "--pretty=%s"], fail_on_error=False)
     
     if branch == "next":
@@ -136,7 +132,6 @@ def main():
     skip_patterns = [
         (r"^chore(\(.*\))?: release", "release-please commit"),
         ("release-please", "release-please merge"),
-        ("chore: reset manifest", "manifest reset"),
     ]
     
     for pattern, desc in skip_patterns:
@@ -146,9 +141,7 @@ def main():
     
     if branch in ["main", "master"]:
         try:
-            print("INFO: Fetching branches and tags...")
-            run_git_command(["fetch", "origin", "next"], fail_on_error=False)
-            run_git_command(["fetch", "origin", "main"], fail_on_error=False)
+            run_git_command(["fetch", "origin", branch], fail_on_error=False)
             run_git_command(["fetch", "--tags", "--force"], fail_on_error=False)
             
             tags_output = run_git_command(["tag", "-l", "v*"], fail_on_error=False)
@@ -164,11 +157,8 @@ def main():
                     return (maj, min, pat, is_stable, rc)
                 
                 latest_tag = sorted(all_tags, key=version_key, reverse=True)[0]
-                print(f"INFO: Latest tag: {latest_tag}")
-                
                 clean_tag = re.sub(r'-rc(\.\d+)?$', '', latest_tag)
                 stable_version = clean_tag.lstrip('v')
-                print(f"INFO: Promoting to: {stable_version}")
             
             with open(os.environ["GITHUB_OUTPUT"], "a") as f:
                 f.write(f"next_version={stable_version}\n")
@@ -189,9 +179,6 @@ def main():
         
         major, minor, patch, rc = parse_semver(tag)
         is_breaking, is_feat = analyze_impact_from_latest(tag)
-        
-        print(f"INFO: from_stable={from_stable}, breaking={is_breaking}, feat={is_feat}, depth={depth}")
-        
         next_ver = calculate_next_version(major, minor, patch, rc, depth, is_breaking, is_feat, from_stable)
         
         with open(os.environ["GITHUB_OUTPUT"], "a") as f:
