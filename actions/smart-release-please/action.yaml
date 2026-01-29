@@ -19,13 +19,17 @@ runs:
     - name: Set up Python
       uses: actions/setup-python@v6
       with:
-        python-version: '3.14'
+        python-version: '3.x'
 
     - name: Configure Git Identity
       shell: bash
       run: |
         git config user.name "mapcolonies[bot]"
         git config user.email "devops[bot]@mapcolonies.com"
+
+    - name: Pull Latest Changes
+      shell: bash
+      run: git pull "https://x-access-token:${{ inputs.token }}@github.com/${{ github.repository }}.git" ${{ github.ref_name }}
 
     - name: Calculate Next Version
       id: calc_rc
