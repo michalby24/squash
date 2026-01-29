@@ -167,7 +167,7 @@ def main():
         
         except Exception as e:
             print(f"ERROR: {e}")
-            sys.exit(0)
+            sys.exit(1)
     
     try:
         tag, from_stable = find_baseline_tag()
@@ -188,7 +188,7 @@ def main():
     
     except Exception as e:
         print(f"ERROR: {e}")
-        sys.exit(0)
+        sys.exit(1)
 
 if __name__ == "__main__":
     main()
