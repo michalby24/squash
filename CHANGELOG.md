@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.11.0-rc.2](https://github.com/michalby24/squash/compare/v0.11.0-rc.1...v0.11.0-rc.2) (2026-02-02)
+
+
+### Features
+
+* shimon ([#232](https://github.com/michalby24/squash/issues/232)) ([0816425](https://github.com/michalby24/squash/commit/0816425f041c964d7362edc5f8a81959a1a04d0c))
+
+
+### Miscellaneous Chores
+
+* enforce correct rc version ([606be50](https://github.com/michalby24/squash/commit/606be501e8ab0454785dc8bce413550bed1eb8a9))
+
 ## [0.11.0-rc.1](https://github.com/michalby24/squash/compare/v0.10.4-rc.1...v0.11.0-rc.1) (2026-02-02)
 
 
